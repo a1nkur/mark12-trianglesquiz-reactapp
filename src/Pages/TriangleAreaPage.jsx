@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { BsArrowLeft } from "react-icons/bs";
 import { useHistory } from "react-router-dom";
 
-const CheckHypoPage = () => {
+const TriangleAreaPage = () => {
   const history = useHistory();
 
   //* State
@@ -15,6 +15,7 @@ const CheckHypoPage = () => {
   });
 
   const [result, setResult] = useState(null);
+  const [error, setError] = useState(null);
 
   //* Event Handlers
   const handleOnChange = e => {
@@ -29,10 +30,21 @@ const CheckHypoPage = () => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    const { a, b } = enteredFormData;
-    const result = Math.sqrt(a ** 2 + b ** 2).toFixed(2);
+    const { a, b, c } = enteredFormData;
 
-    setResult(result);
+    if (a + b > c && b + c > a && c + a > b) {
+      console.log(a, b, c, "in");
+      const s = (a + b + c) / 2;
+      console.log(s);
+      const area = Math.sqrt(s * (s - a) * (s - b) * (s - c)).toFixed(2);
+      console.log(area);
+      setResult(area);
+      setError(false);
+      console.log(area);
+    } else {
+      setError(true);
+      setResult(null);
+    }
   };
 
   return (
@@ -43,10 +55,10 @@ const CheckHypoPage = () => {
         </button>
         <div className="title">
           <h1>
-            Calculate the <span>Hypotenuse</span> of the <span>Δ</span>
+            Calculate the <span>area</span> of the <span>Δ</span>
           </h1>
           <h1>
-            using the formula <span>√(base² + height²)</span> .
+            using <span>Heron's Formula</span> .
           </h1>
         </div>
         <ActionArea>
@@ -59,7 +71,7 @@ const CheckHypoPage = () => {
                   id="a"
                   min={0}
                   step={0.1}
-                  placeholder="Enter base value A"
+                  placeholder="Enter first side of the triangle"
                   onChange={handleOnChange}
                   value={enteredFormData.a}
                   required
@@ -72,21 +84,36 @@ const CheckHypoPage = () => {
                   id="b"
                   min={0}
                   step={0.1}
-                  placeholder="Enter base value B"
+                  placeholder="Enter second side of the triangle"
                   onChange={handleOnChange}
                   value={enteredFormData.b}
                   required
                 />
               </div>
-
-              <button type="submit"> calculate </button>
+              <div className="form__control">
+                <input
+                  type="number"
+                  name="c"
+                  id="c"
+                  min={0}
+                  step={0.1}
+                  placeholder="Enter third side of the triangle"
+                  onChange={handleOnChange}
+                  value={enteredFormData.c}
+                  required
+                />
+              </div>
+              <button type="submit"> check</button>
             </form>
           </FormContainer>
           <Output>
             {result && (
               <h3 style={{ color: "#23d997" }}>
-                H = {result} unit <sup>2</sup>
+                {result} unit <sup>2</sup>
               </h3>
+            )}
+            {error && (
+              <h3 style={{ color: "#ff0000" }}>Invalid length entered.</h3>
             )}
           </Output>
         </ActionArea>
@@ -95,7 +122,7 @@ const CheckHypoPage = () => {
   );
 };
 
-export default CheckHypoPage;
+export default TriangleAreaPage;
 
 /* ---------------------------- Styled Components --------------------------- */
 

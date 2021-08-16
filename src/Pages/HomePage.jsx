@@ -18,7 +18,7 @@ const HomePage = () => {
             <p>Take Quiz</p> <AiOutlineArrowRight />
           </div>
         </Link>
-        <Link to="/checkhypo">
+        <Link to="/check-hypotenuse">
           <div className="option">
             <p>Hypotenuse Calculator</p> <AiOutlineArrowRight />
           </div>
@@ -43,15 +43,9 @@ export default HomePage;
 /* ---------------------------- Styled Components --------------------------- */
 
 const Container = styled.div`
-  border: 1px solid red;
   max-width: 96%;
   background-color: #131515;
   color: #fff;
-
-  @media (max-width: 500px) {
-    height: 100%;
-    width: 100%;
-  }
 `;
 
 const TitleContainer = styled.div`

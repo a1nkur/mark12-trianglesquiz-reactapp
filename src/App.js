@@ -6,7 +6,7 @@ import { Route, Switch } from "react-router-dom";
 import QuizPage from "./Pages/QuizPage";
 import CheckHypoPage from "./Pages/CheckHypoPage";
 import AnglesOfTrianglePage from "./Pages/AnglesOfTrianglePage";
-import TriangleAreaPage from "./Pages/TraingleAreaPage";
+import TriangleAreaPage from "./Pages/TriangleAreaPage";
 
 function App() {
   return (

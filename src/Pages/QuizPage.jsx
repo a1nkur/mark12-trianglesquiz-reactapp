@@ -11,6 +11,16 @@ const QuizPage = () => {
 
   // eslint-disable-next-line no-unused-vars
   const [quesitonSet, setQuestionSet] = useState(data);
+  // eslint-disable-next-line no-unused-vars
+  const [score, setScore] = useState(0);
+  // eslint-disable-next-line no-unused-vars
+  const [showScore, setShowScore] = useState(false);
+
+  const handleSubmit = e => {
+    e.preventDefault();
+
+    setShowScore(true);
+  };
 
   return (
     <Outercontainer>
@@ -24,17 +34,26 @@ const QuizPage = () => {
       </div>
       <Container>
         <QuestionContainer>
-          <form>
+          <form onSubmit={handleSubmit}>
             {quesitonSet.map(item => (
-              <QuestionList item={item} key={item.id} />
+              <QuestionList
+                item={item}
+                key={item.id}
+                setScore={setScore}
+                setShowScore={setShowScore}
+              />
             ))}
             <button className="sbmt" type="submit">
-              {" "}
-              Find Result{" "}
+              Submit
             </button>
           </form>
         </QuestionContainer>
-        <ScoreContainer>{/* <h1>10</h1> */}</ScoreContainer>
+        <ScoreContainer>
+          <h1>{showScore && score}</h1>
+          <h3>
+            {!showScore && "click on submit to see the final score score"}
+          </h3>
+        </ScoreContainer>
       </Container>
     </Outercontainer>
   );
@@ -45,12 +64,12 @@ export default QuizPage;
 /* ---------------------------- Styled Components --------------------------- */
 
 const Outercontainer = styled.div`
+  margin-top: -1rem;
   position: relative;
   h3 {
     font-size: 3rem;
     color: #fff;
     display: block;
-
     span {
       color: #23d997;
     }
@@ -60,7 +79,7 @@ const Outercontainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* padding-bottom: 1rem; */
+    padding-bottom: 1rem;
   }
 
   button {
@@ -92,15 +111,14 @@ const Outercontainer = styled.div`
 `;
 
 const Container = styled.div`
-  border: 1px solid red;
   height: calc(100vh - 10rem);
   display: flex;
 `;
 
 const QuestionContainer = styled.div`
   flex: 2;
-  border: 1px solid red;
   overflow: scroll;
+  overflow-x: hidden;
 `;
 
 const ScoreContainer = styled.div`
@@ -108,7 +126,12 @@ const ScoreContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   font-size: 7rem;
   color: rgb(58, 210, 159);
   background: url(${imgOne}) no-repeat center center / cover;
+
+  h3 {
+    font-size: 2rem;
+  }
 `;

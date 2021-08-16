@@ -56,16 +56,16 @@ const data = [
   {
     id: uuidv4(),
     question:
-      "What is the third angle for the triangle where angle1 = 45° and angle2 = 45°?",
-    answer: "90 degree",
-    options: ["45 degree", "120 degree", "60 degree", "175 degree"],
+      "In ∆XYZ, M and N are points on XZ and YZ respectively such that MN is the perpendicular bisector of YZ. If XM = XY and ∠XYZ = 90, what is ∠XZY?",
+    answer: "30 degree",
+    options: ["30 degree", "120 degree", "60 degree", "175 degree"],
   },
   {
     id: uuidv4(),
     question:
       "What is the third angle for the triangle where angle1 = 45° and angle2 = 45°?",
     answer: "90 degree",
-    options: ["45 degree", "120 degree", "90 degree", "60 degree"],
+    options: ["95 degree", "120 degree", "90 degree", "60 degree"],
   },
   {
     id: uuidv4(),
@@ -81,7 +81,7 @@ const data = [
   {
     id: uuidv4(),
     question: "Which of the following triangles are always similar?",
-    answer: "Equilater trianlge",
+    answer: "equilateral triangle",
     options: [
       "equilateral triangle",
       "isoceles triangle",
