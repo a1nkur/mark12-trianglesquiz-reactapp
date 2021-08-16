@@ -1,7 +1,12 @@
 import { useState } from "react";
 import styled from "styled-components";
 
+import { BsArrowLeft } from "react-icons/bs";
+import { useHistory } from "react-router-dom";
+
 const AnglesOfTrianglePage = () => {
+  const history = useHistory();
+
   //* State
   const [enteredFormData, setEnteredFormData] = useState({
     a: "",
@@ -39,6 +44,9 @@ const AnglesOfTrianglePage = () => {
   return (
     <Container>
       <ContentArea>
+        <button className="gobackBtn" onClick={() => history.goBack()}>
+          <BsArrowLeft /> Back
+        </button>
         <div className="title">
           <h1>
             Enter the <span>angles</span> in below input boxes and we
@@ -113,6 +121,8 @@ export default AnglesOfTrianglePage;
 const Container = styled.div``;
 
 const ContentArea = styled.div`
+  position: relative;
+
   h1,
   h2 {
     color: #fff;
@@ -126,9 +136,32 @@ const ContentArea = styled.div`
   }
 
   .title {
-    padding-bottom: 2rem;
+    padding: 2rem 0rem;
     span {
       color: #23d997;
+    }
+  }
+
+  .gobackBtn {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  button {
+    padding: 0.5rem 0.7rem;
+    width: 10%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: transparent;
+    border: 1px solid #23d997;
+    color: #fff;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: #23d997;
+      color: #fff;
     }
   }
 `;

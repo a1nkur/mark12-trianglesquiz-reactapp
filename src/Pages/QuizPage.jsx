@@ -1,72 +1,42 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import imgOne from "../Assets/imgOne.jpg";
 import QuestionList from "../Components/QuesitonList";
+import { BsArrowLeft } from "react-icons/bs";
+import data from "../data";
 
 const QuizPage = () => {
-  const [quesitonSet, setQuestionSet] = useState([
-    {
-      question:
-        "If a triangle has angles 1350, 150, 300. Is it an obtuse triangle?",
-      answer: "yes",
-    },
-    {
-      question:
-        "If a triangle has angles 1150, 250, 400. Is it an acute triangle?",
-      answer: "no",
-    },
-    {
-      question:
-        "If a triangle has angles 900, 600, 300. Is it a right angle triangle?",
-      answer: "yes",
-    },
-    {
-      question:
-        "A triangle has angles 600, 600, 600. Is it an equilateral triangle?",
-      answer: "yes",
-    },
-    {
-      question:
-        "If a triangle has angles 250, 750, 800. Is it an acute triangle?",
-      answer: "yes",
-    },
-    {
-      question:
-        "If a triangle has 2 sides with equal lengths and 750 angle between them. What is the type of triangle?",
-      answer: "",
-    },
-    {
-      question:
-        "If a triangle has 2 angles of 750. What is the measure of third angle in degree?",
-      answer: "",
-    },
-    {
-      question:
-        "If a triangle has 2 sides with equal lengths and 600 angle between them. What is the type of triangle?",
-      answer: "",
-    },
-    {
-      question:
-        "The perimeter of an equilateral triangle is 15cm. What is the length of one side?",
-      answer: "",
-    },
-    {
-      question:
-        "If a triangle has sides of 2cm, 3cm, 4cm, what is the type of triangle?",
-      answer: "",
-    },
-  ]);
+  const history = useHistory();
+
+  // eslint-disable-next-line no-unused-vars
+  const [quesitonSet, setQuestionSet] = useState(data);
 
   return (
-    <Container>
-      <QuestionContainer>
-        <h3>Take the quiz about triangles.</h3>
-        <QuestionList />
-      </QuestionContainer>
-      <ScoreContainer>
-        <h1>10</h1>
-      </ScoreContainer>
-    </Container>
+    <Outercontainer>
+      <div className="heading">
+        <h3>
+          Take a quiz about <span>Δ</span>.
+        </h3>
+        <button className="gobackBtn" onClick={() => history.goBack()}>
+          <BsArrowLeft /> Back
+        </button>
+      </div>
+      <Container>
+        <QuestionContainer>
+          <form>
+            {quesitonSet.map(item => (
+              <QuestionList item={item} key={item.id} />
+            ))}
+            <button className="sbmt" type="submit">
+              {" "}
+              Find Result{" "}
+            </button>
+          </form>
+        </QuestionContainer>
+        <ScoreContainer>{/* <h1>10</h1> */}</ScoreContainer>
+      </Container>
+    </Outercontainer>
   );
 };
 
@@ -74,26 +44,71 @@ export default QuizPage;
 
 /* ---------------------------- Styled Components --------------------------- */
 
+const Outercontainer = styled.div`
+  position: relative;
+  h3 {
+    font-size: 3rem;
+    color: #fff;
+    display: block;
+
+    span {
+      color: #23d997;
+    }
+  }
+
+  .heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* padding-bottom: 1rem; */
+  }
+
+  button {
+    padding: 0.5rem 0.7rem;
+    width: 10%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: transparent;
+    border: 1px solid #23d997;
+    color: #fff;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: #23d997;
+      color: #fff;
+    }
+  }
+
+  .sbmt {
+    margin: 1rem 0;
+    width: 30%;
+    position: relative;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+`;
+
 const Container = styled.div`
-  min-height: 100vh;
-  background: url(${imgOne}) no-repeat center center / cover;
-  padding: 5rem 5rem;
+  border: 1px solid red;
+  height: calc(100vh - 10rem);
   display: flex;
 `;
 
 const QuestionContainer = styled.div`
-  flex: 0.7;
-
-  h3 {
-    font-size: 3rem;
-    color: #fff;
-  }
+  flex: 2;
+  border: 1px solid red;
+  overflow: scroll;
 `;
+
 const ScoreContainer = styled.div`
-  flex: 0.3;
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 7rem;
   color: rgb(58, 210, 159);
+  background: url(${imgOne}) no-repeat center center / cover;
 `;
