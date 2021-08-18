@@ -1,6 +1,9 @@
 import { Fragment } from "react";
 import styled from "styled-components";
 
+import { motion } from "framer-motion";
+import { fade } from "../animate";
+
 const Option = ({
   option,
   name,
@@ -10,8 +13,8 @@ const Option = ({
   setShowScore,
 }) => {
   const handleOnChange = e => {
+    setShowScore(false);
     if (e.target.value === item.answer) {
-      setShowScore(false);
       setScore(prevState => prevState + 1);
     }
   };
@@ -34,7 +37,7 @@ const Option = ({
 
 const QuestionList = ({ item, setScore, setShowScore }) => {
   return (
-    <Container key={item.id}>
+    <Container variants={fade} initial="hidden" animate="show" key={item.id}>
       <h6>{item.question}</h6>
       {item.options.map((option, index) => (
         <Option
@@ -54,7 +57,7 @@ export default QuestionList;
 
 /* ---------------------------- Styled Components --------------------------- */
 
-const Container = styled.div`
+const Container = styled(motion.div)`
   color: #fff;
   padding: 2rem;
 

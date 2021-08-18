@@ -4,6 +4,9 @@ import styled from "styled-components";
 import { BsArrowLeft } from "react-icons/bs";
 import { useHistory } from "react-router-dom";
 
+import { motion } from "framer-motion";
+import { fade, genericAnimate, lineAnimation2 } from "../animate";
+
 const AnglesOfTrianglePage = () => {
   const history = useHistory();
 
@@ -42,8 +45,8 @@ const AnglesOfTrianglePage = () => {
   };
 
   return (
-    <Container>
-      <ContentArea>
+    <Container variants={genericAnimate} initial="hidden" animate="show">
+      <ContentArea variants={fade}>
         <button className="gobackBtn" onClick={() => history.goBack()}>
           <BsArrowLeft /> Back
         </button>
@@ -59,7 +62,8 @@ const AnglesOfTrianglePage = () => {
           <FormContainer>
             <form onSubmit={handleSubmit}>
               <div className="form__control">
-                <input
+                <motion.input
+                  variants={lineAnimation2}
                   type="number"
                   name="a"
                   id="a"
@@ -72,7 +76,8 @@ const AnglesOfTrianglePage = () => {
                 />
               </div>
               <div className="form__control">
-                <input
+                <motion.input
+                  variants={lineAnimation2}
                   type="number"
                   name="b"
                   id="b"
@@ -85,7 +90,8 @@ const AnglesOfTrianglePage = () => {
                 />
               </div>
               <div className="form__control">
-                <input
+                <motion.input
+                  variants={lineAnimation2}
                   type="number"
                   name="c"
                   id="c"
@@ -103,9 +109,9 @@ const AnglesOfTrianglePage = () => {
           <Output>
             {result && <h3 style={{ color: "#23d997" }}>It's a triangle.</h3>}
             {error && (
-              <h3 style={{ color: "#ff0000" }}>
+              <motion.h3 variants={fade} style={{ color: "#ff0000" }}>
                 This cannot make a Δ. Try again!{" "}
-              </h3>
+              </motion.h3>
             )}
           </Output>
         </ActionArea>
@@ -118,9 +124,9 @@ export default AnglesOfTrianglePage;
 
 /* ---------------------------- Styled Components --------------------------- */
 
-const Container = styled.div``;
+const Container = styled(motion.div)``;
 
-const ContentArea = styled.div`
+const ContentArea = styled(motion.div)`
   position: relative;
 
   h1,

@@ -3,35 +3,38 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { AiOutlineArrowRight } from "react-icons/ai";
 
+import { motion } from "framer-motion";
+import { fade, titleAnimate, genericAnimate, lineAnimation2 } from "../animate";
+
 const HomePage = () => {
   return (
-    <Container>
+    <Container variants={genericAnimate} initial="hidden" animate="show">
       <TitleContainer>
-        <h1>
+        <motion.h1 variants={titleAnimate}>
           Fun with <span> Δ</span>s.
-        </h1>
-        <div className="line"></div>
+        </motion.h1>
+        <motion.div className="line" variants={lineAnimation2}></motion.div>
       </TitleContainer>
       <OptionsContainer>
         <Link to="/quiz">
-          <div className="option">
+          <motion.div className="option" variants={fade}>
             <p>Take Quiz</p> <AiOutlineArrowRight />
-          </div>
+          </motion.div>
         </Link>
         <Link to="/check-hypotenuse">
-          <div className="option">
+          <motion.div className="option" variants={fade}>
             <p>Hypotenuse Calculator</p> <AiOutlineArrowRight />
-          </div>
+          </motion.div>
         </Link>
         <Link to="/area-of-triangle">
-          <div className="option">
+          <motion.div className="option" variants={fade}>
             <p>Calculate Area of Triangle</p> <AiOutlineArrowRight />
-          </div>
+          </motion.div>
         </Link>
         <Link to="/angles-of-triangle">
-          <div className="option">
+          <motion.div className="option" variants={fade}>
             <p>Angles of Triangle</p> <AiOutlineArrowRight />
-          </div>
+          </motion.div>
         </Link>
       </OptionsContainer>
     </Container>
@@ -42,13 +45,14 @@ export default HomePage;
 
 /* ---------------------------- Styled Components --------------------------- */
 
-const Container = styled.div`
+const Container = styled(motion.div)`
   max-width: 96%;
   background-color: #131515;
   color: #fff;
 `;
 
 const TitleContainer = styled.div`
+  overflow: hidden;
   padding-bottom: 2rem;
 
   h1 {
@@ -65,7 +69,7 @@ const TitleContainer = styled.div`
 
   .line {
     height: 1px;
-    width: 60%;
+    width: 100%;
     background-color: #fff;
   }
 `;

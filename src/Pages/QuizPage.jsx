@@ -6,6 +6,9 @@ import QuestionList from "../Components/QuesitonList";
 import { BsArrowLeft } from "react-icons/bs";
 import data from "../data";
 
+import { motion } from "framer-motion";
+import { fade, titleAnimate, genericAnimate, lineAnimation3 } from "../animate";
+
 const QuizPage = () => {
   const history = useHistory();
 
@@ -23,17 +26,24 @@ const QuizPage = () => {
   };
 
   return (
-    <Outercontainer>
+    <Outercontainer variants={genericAnimate} initial="hidden" animate="show">
       <div className="heading">
         <h3>
-          Take a quiz about <span>Δ</span>.
+          Take a quiz about <motion.span variants={titleAnimate}>Δ</motion.span>
+          .
         </h3>
         <button className="gobackBtn" onClick={() => history.goBack()}>
           <BsArrowLeft /> Back
         </button>
       </div>
+      <motion.div className="line" variants={lineAnimation3}></motion.div>
+
       <Container>
-        <QuestionContainer>
+        <QuestionContainer
+          variants={genericAnimate}
+          initial="hidden"
+          animate="show"
+        >
           <form onSubmit={handleSubmit}>
             {quesitonSet.map(item => (
               <QuestionList
@@ -49,10 +59,10 @@ const QuizPage = () => {
           </form>
         </QuestionContainer>
         <ScoreContainer>
-          <h1>{showScore && score}</h1>
-          <h3>
+          <motion.h1 variants={fade}>{showScore && score}</motion.h1>
+          <motion.h3 variants={fade}>
             {!showScore && "click on submit to see the final score score"}
-          </h3>
+          </motion.h3>
         </ScoreContainer>
       </Container>
     </Outercontainer>
@@ -63,7 +73,8 @@ export default QuizPage;
 
 /* ---------------------------- Styled Components --------------------------- */
 
-const Outercontainer = styled.div`
+const Outercontainer = styled(motion.div)`
+  overflow: hidden;
   margin-top: -1rem;
   position: relative;
   h3 {
@@ -75,11 +86,22 @@ const Outercontainer = styled.div`
     }
   }
 
+  .line {
+    height: 1px;
+    width: 60%;
+    background-color: #fff;
+  }
+
   .heading {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding-bottom: 1rem;
+    overflow: hidden;
+  }
+
+  h3 {
+    overflow: hidden;
   }
 
   button {
@@ -121,7 +143,7 @@ const QuestionContainer = styled.div`
   overflow-x: hidden;
 `;
 
-const ScoreContainer = styled.div`
+const ScoreContainer = styled(motion.div)`
   flex: 1;
   display: flex;
   align-items: center;

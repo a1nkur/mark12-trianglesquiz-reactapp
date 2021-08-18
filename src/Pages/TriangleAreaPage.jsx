@@ -4,6 +4,9 @@ import styled from "styled-components";
 import { BsArrowLeft } from "react-icons/bs";
 import { useHistory } from "react-router-dom";
 
+import { motion } from "framer-motion";
+import { fade, genericAnimate, lineAnimation2 } from "../animate";
+
 const TriangleAreaPage = () => {
   const history = useHistory();
 
@@ -48,8 +51,8 @@ const TriangleAreaPage = () => {
   };
 
   return (
-    <Container>
-      <ContentArea>
+    <Container variants={genericAnimate} initial="hidden" animate="show">
+      <ContentArea variants={fade}>
         <button className="gobackBtn" onClick={() => history.goBack()}>
           <BsArrowLeft /> Back
         </button>
@@ -65,7 +68,7 @@ const TriangleAreaPage = () => {
           <FormContainer>
             <form onSubmit={handleSubmit}>
               <div className="form__control">
-                <input
+                <motion.input
                   type="number"
                   name="a"
                   id="a"
@@ -74,11 +77,12 @@ const TriangleAreaPage = () => {
                   placeholder="Enter first side of the triangle"
                   onChange={handleOnChange}
                   value={enteredFormData.a}
+                  variants={lineAnimation2}
                   required
                 />
               </div>
               <div className="form__control">
-                <input
+                <motion.input
                   type="number"
                   name="b"
                   id="b"
@@ -87,11 +91,12 @@ const TriangleAreaPage = () => {
                   placeholder="Enter second side of the triangle"
                   onChange={handleOnChange}
                   value={enteredFormData.b}
+                  variants={lineAnimation2}
                   required
                 />
               </div>
               <div className="form__control">
-                <input
+                <motion.input
                   type="number"
                   name="c"
                   id="c"
@@ -100,13 +105,14 @@ const TriangleAreaPage = () => {
                   placeholder="Enter third side of the triangle"
                   onChange={handleOnChange}
                   value={enteredFormData.c}
+                  variants={lineAnimation2}
                   required
                 />
               </div>
               <button type="submit"> check</button>
             </form>
           </FormContainer>
-          <Output>
+          <Output variants={fade}>
             {result && (
               <h3 style={{ color: "#23d997" }}>
                 {result} unit <sup>2</sup>
@@ -126,9 +132,8 @@ export default TriangleAreaPage;
 
 /* ---------------------------- Styled Components --------------------------- */
 
-const Container = styled.div``;
-
-const ContentArea = styled.div`
+const Container = styled(motion.div)``;
+const ContentArea = styled(motion.div)`
   position: relative;
 
   h1,
@@ -214,7 +219,7 @@ const FormContainer = styled.div`
   }
 `;
 
-const Output = styled.div`
+const Output = styled(motion.div)`
   display: flex;
   align-items: center;
   color: #23d997;

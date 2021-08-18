@@ -4,6 +4,9 @@ import styled from "styled-components";
 import { BsArrowLeft } from "react-icons/bs";
 import { useHistory } from "react-router-dom";
 
+import { motion } from "framer-motion";
+import { fade, genericAnimate, lineAnimation2 } from "../animate";
+
 const CheckHypoPage = () => {
   const history = useHistory();
 
@@ -36,8 +39,8 @@ const CheckHypoPage = () => {
   };
 
   return (
-    <Container>
-      <ContentArea>
+    <Container variants={genericAnimate} initial="hidden" animate="show">
+      <ContentArea variants={fade}>
         <button className="gobackBtn" onClick={() => history.goBack()}>
           <BsArrowLeft /> Back
         </button>
@@ -53,7 +56,8 @@ const CheckHypoPage = () => {
           <FormContainer>
             <form onSubmit={handleSubmit}>
               <div className="form__control">
-                <input
+                <motion.input
+                  variants={lineAnimation2}
                   type="number"
                   name="a"
                   id="a"
@@ -66,7 +70,8 @@ const CheckHypoPage = () => {
                 />
               </div>
               <div className="form__control">
-                <input
+                <motion.input
+                  variants={lineAnimation2}
                   type="number"
                   name="b"
                   id="b"
@@ -82,11 +87,11 @@ const CheckHypoPage = () => {
               <button type="submit"> calculate </button>
             </form>
           </FormContainer>
-          <Output>
+          <Output variants={fade}>
             {result && (
-              <h3 style={{ color: "#23d997" }}>
+              <motion.h3 variants={fade} style={{ color: "#23d997" }}>
                 H = {result} unit <sup>2</sup>
-              </h3>
+              </motion.h3>
             )}
           </Output>
         </ActionArea>
@@ -99,9 +104,9 @@ export default CheckHypoPage;
 
 /* ---------------------------- Styled Components --------------------------- */
 
-const Container = styled.div``;
+const Container = styled(motion.div)``;
 
-const ContentArea = styled.div`
+const ContentArea = styled(motion.div)`
   position: relative;
 
   h1,
@@ -187,7 +192,7 @@ const FormContainer = styled.div`
   }
 `;
 
-const Output = styled.div`
+const Output = styled(motion.div)`
   display: flex;
   align-items: center;
   color: #23d997;
