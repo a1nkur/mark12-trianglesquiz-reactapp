@@ -114,12 +114,14 @@ const TriangleAreaPage = () => {
           </FormContainer>
           <Output variants={fade}>
             {result && (
-              <h3 style={{ color: "#23d997" }}>
+              <motion.h3 variants={fade} style={{ color: "#23d997" }}>
                 {result} unit <sup>2</sup>
-              </h3>
+              </motion.h3>
             )}
             {error && (
-              <h3 style={{ color: "#ff0000" }}>Invalid length entered.</h3>
+              <motion.h3 variants={fade} style={{ color: "#ff0000" }}>
+                Invalid length entered.
+              </motion.h3>
             )}
           </Output>
         </ActionArea>
